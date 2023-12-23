@@ -1,24 +1,24 @@
-const noImage =
-  "https://t4.ftcdn.net/jpg/04/00/24/31/360_F_400243185_BOxON3h9avMUX10RsDkt3pJ8iQx72kS3.jpg";
-const apiKey = "f9040ab1b9c802857aa783c469d0e0ff7e7366e4";
-const publisherId = "taboola-templates";
-const appType = "desktop";
-const sourceId = "israel";
+const noImage = "https://fl-1.cdn.flockler.com/embed/no-image.svg";
 
-const widgetContainer = document.getElementById("recommendation-widget");
+const apiKey = "f9040ab1b9c802857aa783c469d0e0ff7e7366e4";
+
+const publisherId = "taboola-templates";
+
+const appType = "desktop";
+
+const sourceId = "56468964896489";
+
+const apiUrl = `http://api.taboola.com/1.0/json/${publisherId}/recommendations.get?app.type=${appType}&app.apikey=${apiKey}&count=6&source.id=${sourceId}&source.type=video&source.url=https://www.usatoday.com/story/news/politics/onpolitics/2016/06/20/hillary-clinton-built-big-stockpile-showdown-donald-trump/86161596/`;
 
 document.addEventListener("DOMContentLoaded", function () {
   // Fetch recommendations and render them in the widget
   fetchAds().then((res) => renderAds(res));
 });
 
-
 async function fetchAds() {
-  const apiUrl = `http://api.taboola.com/1.0/json/${publisherId}/recommendations.get?app.type=${appType}&app.apikey=${apiKey}&count=6&source.id=${sourceId}&source.type=video&source.url=https://www.usatoday.com/story/news/politics/onpolitics/2016/06/20/hillary-clinton-built-big-stockpile-showdown-donald-trump/86161596/`;
   try {
     const response = await fetch(apiUrl);
     const data = await response.json();
-    console.log(data);
     return data.list;
   } catch (error) {
     console.error("Error fetching recommendations:", error);
@@ -26,19 +26,32 @@ async function fetchAds() {
 }
 
 function renderAds(recommendations) {
-  const adContainer = document.getElementById("adContainer");
+//   const sortedAds = [...recommendations].sort((a, b) => {
+//     return a.name.length - b.name.length;
+//   });
+
+  const container = document.getElementById("container");
+  const title = `<div class="sponsored-title">
+                    <div id="more-for-you">Recommended for you</div>
+                    <div id="sponsored-links">Sponsored Links</div>
+
+                </div>
+                <hr class="hr-line" />`;
+  container.innerHTML = title;
+
+  const adContainer = document.createElement("div");
+  adContainer.id = "adContainer";
+  adContainer.className = "ad-container";
+  container.appendChild(adContainer);
+
   recommendations.forEach((ad) => {
-    if (ad.origin != "sponsored") {
-      console.log("organicc", ad);
-    }
     const adCard = document.createElement("div");
     adCard.className = "ad-card";
 
     const adThumbnail = document.createElement("img");
     adThumbnail.className = "ad-thumbnail";
-    adThumbnail.src = ad.thumbnail[0].url;
+    adThumbnail.src = ad.thumbnail[0].url; // check if its empty
     adThumbnail.onerror = () => {
-      //change the height
       adThumbnail.src = noImage;
     };
 
@@ -51,11 +64,10 @@ function renderAds(recommendations) {
 
     const adDescription = document.createElement("div");
     adDescription.className = "ad-description";
-    // adDescription.textContent = ad.description;
 
     const adCreated = document.createElement("div");
     adCreated.className = "ad-created";
-    // Convert the created date to a more readable format
+
     const createdDate = new Date(ad.created);
     adCreated.textContent = `${createdDate.toLocaleString().split(",")[0]}`;
 
@@ -72,7 +84,7 @@ function renderAds(recommendations) {
     // bottomDetails.appendChild(adCreated);
 
     adDetails.appendChild(adTitle);
-    adDetails.appendChild(adDescription);
+    // adDetails.appendChild(adDescription);
     // adDetails.appendChild(adCreated); // Added the created date
     // adDetails.appendChild(adBranding);
     adDetails.appendChild(bottomDetails);
@@ -87,6 +99,9 @@ function renderAds(recommendations) {
 
     adContainer.appendChild(adCard);
   });
+  const hrLine = document.createElement("hr");
+  hrLine.className = "hr-line";
+  container.appendChild(hrLine);
 }
 
 function openAdUrl(url, origin) {

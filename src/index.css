@@ -1,22 +1,33 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
+  background-color: #efefef;
+  margin: 0;
 }
 
 .ad-container {
   display: grid;
-  gap: 20px;
+  gap: 15px;
+  margin-bottom: 5px;
 
   flex-wrap: wrap;
   justify-content: center;
   grid-template-columns: repeat(3, 1fr);
   /* max-height: 600px; */
 }
+#container{
+  margin-top: 20px;
+  background-color: white;
+  padding: 20px;
+
+}
 
 .ad-card {
   overflow: hidden;
-  width: 250px; /* Adjust the width as needed */
+  width: 250px;
   display: flex;
   flex-direction: column;
+  /* border: 1px solid #ddd; */
+  /* border-radius: 8px; */
 }
 
 .ad-thumbnail {
@@ -28,7 +39,6 @@ body {
 .ad-details {
   display: flex;
   flex-direction: column;
-  height: 100%; /* Make sure ad-details takes 100% height */
   padding: 10px 10px 10px 0;
 }
 
@@ -36,10 +46,15 @@ body {
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 5px;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+.ad-title:hover {
+  text-decoration: underline; 
 }
 
 .ad-description {
-  font-size: 12px;
+  font-size: 14px;
   margin-bottom: 10px;
 }
 
@@ -49,14 +64,14 @@ body {
 }
 
 .ad-branding {
-  font-size: 10px;
+  font-size: 12px;
   color: #888;
 }
 
 .bottom-details {
   display: flex;
   flex-direction: column;
-  margin-top: auto;
+  margin-top: 2px;
 }
 
 .ad-card:hover {
@@ -64,7 +79,7 @@ body {
 }
 
 .hr-line {
-  margin: 0 0 10px 0px;
+  margin: 0 0 15px 0px;
   border: 0;
   height: 1px;
   background: #888;
@@ -73,17 +88,20 @@ body {
 .sponsored-title {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 #sponsored-links {
-  font-size: 10px;
+  font-size: 12px;
   color: #888;
 }
 
 #more-for-you {
-  font-weight: 800;
-  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif !important;
-  font-size: 14px;
+  font-weight: 700;
+  font-family: 'Roboto Mono', monospace ;
+  font-size: 16px;
+  margin-bottom: 4px;
+  color: #0f4c8d;
 }
 
 @media (min-width: 901px) {
@@ -105,7 +123,7 @@ body {
   }
 
   .ad-thumbnail {
-    height: 100px;
+    height: 180px;
   }
 
   .ad-details {
@@ -117,7 +135,7 @@ body {
   }
 
   .ad-description {
-    font-size: 10px;
+    font-size: 12px;
   }
 
   .ad-created {
@@ -125,6 +143,6 @@ body {
   }
 
   .ad-branding {
-    font-size: 8px;
+    font-size: 10px;
   }
 }
