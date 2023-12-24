@@ -9,12 +9,24 @@ export function renderAds(recommendations) {
   const container = document.getElementById("container");
   const hrLine = document.createElement("hr");
   hrLine.className = "hr-line";
-  const title = `<div class="sponsored-title">
-                    <div id="more-for-you">Recommended for you</div>
-                    <div id="sponsored-links">Sponsored Links</div>
-                </div>
-                <hr class="hr-line"/>`;
-  container.innerHTML = title;
+
+  const sponsoredTitle = document.createElement("div");
+  sponsoredTitle.className = "sponsored-title";
+
+  const moreForYou = document.createElement("div");
+  moreForYou.id = "more-for-you";
+  moreForYou.textContent = "Recommended for you";
+
+  const sponsoredLinks = document.createElement("div");
+  sponsoredLinks.id = "sponsored-links";
+  sponsoredLinks.textContent = "Sponsored Links";
+
+  sponsoredTitle.appendChild(moreForYou);
+  sponsoredTitle.appendChild(sponsoredLinks);
+
+  container.appendChild(sponsoredTitle);
+  container.innerHTML += "<hr class='hr-line'/>";
+
   ads(recommendations, container);
   container.appendChild(hrLine);
 }

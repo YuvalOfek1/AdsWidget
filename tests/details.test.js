@@ -7,8 +7,8 @@ test("details function generates the correct element", () => {
     origin: "sponsored",
   };
   const result = details(ad);
-  expect(result.tagName).toBe("div");
+  expect(result.tagName).toBe("DIV");
   expect(result.className).toBe("ad-details");
   expect(result.children.length).toBe(2);
-  expect(result.children[0].tagName).toBe("div");
+  expect(result.children[0].tagName).toBe("DIV");
 });
