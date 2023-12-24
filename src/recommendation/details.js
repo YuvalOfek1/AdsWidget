@@ -1,20 +1,19 @@
 import { branding as brandingComp } from "./branding";
 
-export const details = ({name, created, branding, origin}) => {
+export const details = ({ name, created, branding, origin }) => {
+  const adDetails = document.createElement("div");
+  adDetails.className = "ad-details";
 
-    const adDetails = document.createElement("div");
-    adDetails.className = "ad-details";
+  const adTitle = document.createElement("div");
+  adTitle.className = "ad-title";
+  adTitle.textContent = name;
 
-    const adTitle = document.createElement("div");
-    adTitle.className = "ad-title";
-    adTitle.textContent = name;
+  const bottomDetails = document.createElement("div");
+  bottomDetails.className = "bottom-details";
+  bottomDetails.appendChild(brandingComp(branding, origin));
 
-    const bottomDetails = document.createElement("div");
-    bottomDetails.className = "bottom-details";
-    bottomDetails.appendChild(brandingComp(branding, origin));
+  adDetails.appendChild(adTitle);
+  adDetails.appendChild(bottomDetails);
 
-    adDetails.appendChild(adTitle);
-    adDetails.appendChild(bottomDetails);
-
-    return adDetails
-}
+  return adDetails;
+};
